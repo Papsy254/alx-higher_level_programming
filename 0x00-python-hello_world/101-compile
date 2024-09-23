@@ -1,14 +1,2 @@
 #!/bin/bash
-
-# Check if PYFILE is set
-if [ -z "$PYFILE" ]; then
-	echo "Error: PYFILE environment variable is not set."
-	exit 1
-fi
-
-# Compile the Python file
-python3 -m compileall -b "$PYFILE"
-
-# Rename the .pyc file to the expected format: PYFILEc
-compiled_file="${PYFILE}c"
-mv "${PYFILE}c" "$compiled_file"
+python3 -c "import py_compile; py_compile.compile('$PYFILE', '$PYFILE' + 'c')"
